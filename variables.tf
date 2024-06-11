@@ -63,3 +63,7 @@ variable "nat" {
   type        = bool
   default     = false
 }
+
+variable "user-data" {
+  default = ""
+}
