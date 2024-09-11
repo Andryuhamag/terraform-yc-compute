@@ -13,7 +13,7 @@
 | `core_fraction`             | `number`      | Гарантированная доля vCPU (%)     | 20                                      |
 | `gpus`                      | `number`      | Количество vGPU                   | 0                                       |
 | `preemptible`               | `bool`        | Прерываемость                     | false                                   |
-| `allow_stopping_for_update` | `bool`        | Позволяет Terraform остановить экземпляр, чтобы обновить его свойства | false                                   |
+| `allow_stopping_for_update` | `bool`        | Позволяет Terraform остановить экземпляр, чтобы обновить его свойства | true |
 | `memory`                    | `number`      | Количество RAM                    | 2                                       |
 | `imade_id`                  | `string`      | ID образа для сервера             | Нет                                     |
 | `disk_type`                 | `string`      | Тип диска                         | "network-hdd"                           |
@@ -55,4 +55,13 @@ module "example-instance" {
   nat           = true
   user-data     = file("./cloud-config.yaml")
 }
+...
+#cloud-config.yaml
+ssh_pwauth: no
+users:
+  - name: admin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa XXXX...
 ```
