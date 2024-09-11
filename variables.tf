@@ -51,6 +51,25 @@ variable "memory" {
   default     = 2
 }
 
+variable "gpus" {
+  description = "Specifies the number of GPU devices for the instance"
+  type        = number
+  default     = 0
+
+}
+
+variable "allow_stopping_for_update" {
+  description = "If true, allows Terraform to stop the instance in order to update its properties"
+  type        = bool
+  default     = true
+
+}
+
+variable "preemptible" {
+  description = "Specifies if the instance is preemptible"
+  type        = bool
+  default     = false
+}
 #=============== Boot disk parameters ===============#
 variable "imade_id" {
   description = "Image ID"

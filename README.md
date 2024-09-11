@@ -2,23 +2,26 @@
 
 Входные памаретры модуля:
 
-| Название параметра | Тип           | Описание                          | Значение по умолчанию                   |
-|--------------------|---------------|-----------------------------------|-----------------------------------------|
-| `zone`             | `string`      | Зона доступности                  | "ru-central1-a"                         |
-| `name`             | `string`      | Имя сервера в `YC`                | "instance"                              |
-| `hostname`         | `string`      | Внутреннее имя сервера            | "instance"                              |
-| `platform_id`      | `string`      | Платформа сервера                 | "standard-v1"                           |
-| `labels`           | `map(string)` | Метки сервера                     | name = "instance", environment = "test" |
-| `cores`            | `number`      | Количество vCPU                   | 2                                       |
-| `core_fraction`    | `number`      | Гарантированная доля vCPU (%)     | 20                                      |
-| `memory`           | `number`      | Количество RAM                    | 2                                       |
-| `imade_id`         | `string`      | ID образа для сервера             | Нет                                     |
-| `disk_type`        | `string`      | Тип диска                         | "network-hdd"                           |
-| `disk_size`        | `number`      | Размер диска                      | 20                                      |
-| `subnet_id`        | `string`      | ID подсети                        | Нет                                     |
-| `sg_id`            | `string`      | ID группы безопасности            | Нет                                     |
-| `nat`              | `bool`        | Публичный адрес                   | false                                   |
-| `user-data`        | `string`      | Параметры настройки пользователей | Нет                                     |
+| Название параметра          | Тип           | Описание                          | Значение по умолчанию                   |
+|-----------------------------|---------------|-----------------------------------|-----------------------------------------|
+| `zone`                      | `string`      | Зона доступности                  | "ru-central1-a"                         |
+| `name`                      | `string`      | Имя сервера в `YC`                | "instance"                              |
+| `hostname`                  | `string`      | Внутреннее имя сервера            | "instance"                              |
+| `platform_id`               | `string`      | Платформа сервера                 | "standard-v1"                           |
+| `labels`                    | `map(string)` | Метки сервера                     | name = "instance", environment = "test" |
+| `cores`                     | `number`      | Количество vCPU                   | 2                                       |
+| `core_fraction`             | `number`      | Гарантированная доля vCPU (%)     | 20                                      |
+| `gpus`                      | `number`      | Количество vGPU                   | 0                                       |
+| `preemptible`               | `bool`        | Прерываемость                     | false                                   |
+| `allow_stopping_for_update` | `bool`        | Позволяет Terraform остановить экземпляр, чтобы обновить его свойства | false                                   |
+| `memory`                    | `number`      | Количество RAM                    | 2                                       |
+| `imade_id`                  | `string`      | ID образа для сервера             | Нет                                     |
+| `disk_type`                 | `string`      | Тип диска                         | "network-hdd"                           |
+| `disk_size`                 | `number`      | Размер диска                      | 20                                      |
+| `subnet_id`                 | `string`      | ID подсети                        | Нет                                     |
+| `sg_id`                     | `string`      | ID группы безопасности            | Нет                                     |
+| `nat`                       | `bool`        | Публичный адрес                   | false                                   |
+| `user-data`                 | `string`      | Параметры настройки пользователей | Нет                                     |
 
 Пример использования:
 
@@ -44,6 +47,7 @@ module "example-instance" {
   cores         = 2
   core_fraction = 20
   memory        = 2
+  preemptible   = true
   imade_id      = "fd88bokmvjups3o0uqes" # family_id: ubuntu-2204-lts
   disk_size     = 40
   subnet_id     = "<Existing subnet ID>"
